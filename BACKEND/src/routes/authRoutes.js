@@ -1,0 +1,19 @@
+const express = require("express");
+const router = express.Router();
+
+const {
+  register,
+  login,
+  getProfile,
+} = require("../controllers/authController");
+
+const verifyToken = require("../middleware/authMiddleware");
+
+router.post("/register", register);
+
+router.post("/login", login);
+
+// wajib pakai middleware
+router.get("/me", verifyToken, getProfile);
+
+module.exports = router;
