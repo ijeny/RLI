@@ -34,6 +34,11 @@ export default function App() {
   const [activeMenu, setActiveMenu] = useState('dashboard');
   const [metodePenarikan, setMetodePenarikan] = useState('cash');
   const [nomorIdentitas, setNomorIdentitas] = useState('');
+  const [namaPengambil, setNamaPengambil] = useState('');
+  const [hubunganPengambilan, setHubunganPengambil] = useState('');
+  const [nomorHPPengambil, setNomorHPPengambil] = useState('');
+  const [fotoPengambil, setFotoPengambil] = useState<File | null>(null);
+  const [previewFotoPengambil, setPreviewFotoPengambil] = useState('');
   // UI state
   const [showTambahUser, setShowTambahUser] = useState(false);
   const [showTambahNasabah, setShowTambahNasabah] = useState(false);
@@ -411,7 +416,15 @@ export default function App() {
                   <td className="py-3 px-4 text-card-foreground">{user.name}</td>
                   <td className="py-3 px-4 text-muted-foreground">{user.email}</td>
                   <td className="py-3 px-4">
-                    <span className="px-2 py-0.5 bg-primary/10 text-primary rounded text-xs">{user.role}</span>
+                    <span className="px-2 py-0.5 bg-primary/10 text-primary rounded text-xs">
+                    {user.role === "admin_ifk"
+                        ? "Super Admin"
+                        : user.role === "operator"
+                        ? "Operator"
+                        : user.role === "kasir"
+                        ? "Kasir"
+                        : user.role}
+                    </span>
                   </td>
                   <td className="py-3 px-4">
                     <span className="px-2 py-0.5 bg-accent/30 text-primary rounded text-xs">{user.status}</span>
@@ -1477,6 +1490,14 @@ export default function App() {
                 alert("Upload foto identitas terlebih dahulu");
                 return;
               }
+
+              if(!fotoPengambil){
+
+                alert("Foto pengambil wajib diupload");
+
+                return;
+
+              } 
 
               setPenarikanSuccess(true);
               setRiwayatPenarikanList(prev => [{
