@@ -9,6 +9,10 @@ const penarikanRoutes = require("./routes/penarikanRoute");
 const categoryProductRoutes = require("./routes/categoryProductRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const checkoutRoutes = require("./routes/checkoutRoutes");
+const inventoryRoutes = require("./routes/inventoryRoutes");
+const transaksiRoutes = require("./routes/transaksiRoutes");
+const detailTransaksiRoutes = require("./routes/detailTransaksiRoutes");
+const pembayaranRoutes = require("./routes/pembayaranRoutes");
 
 const app = express();
 // console.log("Category Product Route Loaded");
@@ -27,6 +31,10 @@ app.use("/api/penarikan", penarikanRoutes);
 app.use("/api/product-categories", categoryProductRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/checkout", checkoutRoutes);
+app.use("/api/inventory", inventoryRoutes);
+app.use("/api/transaksi", transaksiRoutes);
+app.use("/api/detail-transaksi", detailTransaksiRoutes);
+app.use("/api/pembayaran", pembayaranRoutes);
 
 // console.log("category-product route registered");
 app.get("/api/test", (req, res) => {
@@ -34,6 +42,10 @@ app.get("/api/test", (req, res) => {
         success: true,
         message: "API TEST BERHASIL"
     });
+});
+
+app.get("/api/test-transaksi", (req, res) => {
+  res.json({ message: "Transaksi OK" });
 });
 
 // Test Route
