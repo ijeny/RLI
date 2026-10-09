@@ -13,7 +13,6 @@ import {
   User,
   Database,
   ShoppingBag,
-  PlusCircle,
   ArrowDownCircle,
   ClipboardList,
   Recycle,
@@ -42,43 +41,48 @@ interface SidebarProps {
 }
 
 const menuItems: MenuItem[] = [
-  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
   {
-    id: 'manajemen-user',
-    label: 'Manajemen User',
+    id: "manajemen-user",
+    label: "Manajemen User",
     icon: Users,
-    children: [
-      { id: 'data-user', label: 'Data User', icon: User },
-    ],
+    children: [{ id: "data-user", label: "Data User", icon: User }],
   },
   {
-    id: 'bank-sampah',
-    label: 'Bank Sampah',
+    id: "bank-sampah",
+    label: "Bank Sampah",
     icon: Trash2,
     children: [
-      { id: 'data-nasabah', label: 'Data Nasabah', icon: Database },
-      { id: 'setoran-masuk', label: 'Setoran Masuk', icon: ArrowDownCircle },
-      { id: 'draft-setoran', label: 'Draft Setoran', icon: ClipboardList },
-      { id: 'pengelolaan-sampah', label: 'Pengelolaan Sampah', icon: Recycle },
-      { id: 'pengelolaan-pupuk', label: 'Pengelolaan Pupuk', icon: FlaskConical },
-      { id: 'penarikan-uang', label: 'Penarikan Uang', icon: Banknote },
-      { id: 'riwayat-penarikan', label: 'Riwayat Penarikan', icon: History },
+      { id: "data-nasabah", label: "Data Nasabah", icon: Database },
+      { id: "setoran-masuk", label: "Setoran Masuk", icon: ArrowDownCircle },
+      { id: "draft-setoran", label: "Draft Setoran", icon: ClipboardList },
+      { id: "pengelolaan-sampah", label: "Pengelolaan Sampah", icon: Recycle },
+      {
+        id: "pengelolaan-pupuk",
+        label: "Pengelolaan Pupuk",
+        icon: FlaskConical,
+      },
+      { id: "penarikan-uang", label: "Penarikan Uang", icon: Banknote },
+      { id: "riwayat-penarikan", label: "Riwayat Penarikan", icon: History },
     ],
   },
   {
-    id: 'produk-edu',
-    label: 'Produk & Edu Store',
+    id: "produk-edu",
+    label: "Produk & Edu Store",
     icon: Package,
     children: [
-      { id: 'pengelolaan-produk', label: 'Pengelolaan Produk', icon: ShoppingBag },
-      { id: 'tambah-produk', label: 'Tambah Produk', icon: PlusCircle },
-      { id: 'pelatihan', label: 'Pelatihan', icon: GraduationCap },
-      { id: 'riwayat-pelatihan', label: 'Riwayat Pelatihan', icon: History },
+      {
+        id: "pengelolaan-produk",
+        label: "Pengelolaan Produk",
+        icon: ShoppingBag,
+      },
+      { id: "pelatihan", label: "Pelatihan", icon: GraduationCap },
+      { id: "riwayat-pelatihan", label: "Riwayat Pelatihan", icon: History },
     ],
   },
-  { id: 'manajemen-ifk', label: 'Manajemen IFK', icon: Building2 },
-  { id: 'kurikulum-hijau', label: 'Kurikulum Hijau', icon: BookOpen },
-  { id: 'laporan', label: 'Laporan', icon: FileText },
+  { id: "manajemen-ifk", label: "Manajemen IFK", icon: Building2 },
+  { id: "kurikulum-hijau", label: "Kurikulum Hijau", icon: BookOpen },
+  { id: "laporan", label: "Laporan", icon: FileText },
 ];
 
 function getParentId(activeMenu: string): string | null {
@@ -141,21 +145,23 @@ export function Sidebar({ activeMenu, onMenuClick }: SidebarProps) {
                   onClick={() => handleParentClick(item)}
                   className={`
                     w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all
-                    ${!hasChildren && activeMenu === item.id
-                      ? 'bg-primary text-primary-foreground shadow-sm'
-                      : hasChildren && active
-                      ? 'text-primary bg-primary/10'
-                      : 'text-sidebar-foreground hover:bg-sidebar-accent'
+                    ${
+                      !hasChildren && activeMenu === item.id
+                        ? "bg-primary text-primary-foreground shadow-sm"
+                        : hasChildren && active
+                          ? "text-primary bg-primary/10"
+                          : "text-sidebar-foreground hover:bg-sidebar-accent"
                     }
                   `}
                 >
                   <Icon className="w-5 h-5 shrink-0" />
                   <span className="text-sm flex-1 text-left">{item.label}</span>
-                  {hasChildren && (
-                    isOpen
-                      ? <ChevronDown className="w-4 h-4 shrink-0" />
-                      : <ChevronRight className="w-4 h-4 shrink-0" />
-                  )}
+                  {hasChildren &&
+                    (isOpen ? (
+                      <ChevronDown className="w-4 h-4 shrink-0" />
+                    ) : (
+                      <ChevronRight className="w-4 h-4 shrink-0" />
+                    ))}
                 </button>
 
                 {hasChildren && isOpen && (
@@ -169,9 +175,10 @@ export function Sidebar({ activeMenu, onMenuClick }: SidebarProps) {
                           onClick={() => onMenuClick(child.id)}
                           className={`
                             w-full flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all text-left
-                            ${childActive
-                              ? 'bg-primary text-primary-foreground shadow-sm'
-                              : 'text-sidebar-foreground hover:bg-sidebar-accent'
+                            ${
+                              childActive
+                                ? "bg-primary text-primary-foreground shadow-sm"
+                                : "text-sidebar-foreground hover:bg-sidebar-accent"
                             }
                           `}
                         >
@@ -195,8 +202,12 @@ export function Sidebar({ activeMenu, onMenuClick }: SidebarProps) {
               <span className="text-xs text-primary">A</span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm text-sidebar-foreground truncate">Admin User</p>
-              <p className="text-xs text-muted-foreground">admin@ecowaste.com</p>
+              <p className="text-sm text-sidebar-foreground truncate">
+                Admin User
+              </p>
+              <p className="text-xs text-muted-foreground">
+                admin@ecowaste.com
+              </p>
             </div>
           </div>
         </div>

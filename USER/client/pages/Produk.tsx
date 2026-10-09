@@ -24,7 +24,7 @@ export default function Produk() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [priceRange, setPriceRange] = useState([0, 500000]);
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -42,28 +42,42 @@ export default function Produk() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        setLoading(true);
-        setError(null);
-        const response = await getProducts(
-          1,
-          100,
-          selectedCategory !== "all" ? selectedCategory : undefined,
-          searchTerm,
-        );
-        setProducts(response.data || []);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Gagal memuat data");
-      } finally {
-        setLoading(false);
+        const response = await fetch("http://localhost:3000/api/products");
+        const data = await response.json();
+
+        console.log("Data produk dari API:", data);
+
+        const formattedProducts = data.map((product: any) => ({
+          id: product.id_produk,
+          name: product.nama_produk,
+          price: Number(product.harga_satuan),
+          stock: Number(product.stok_tersedia),
+          image: product.gambar_url,
+          unit: "unit",
+        }));
+
+        setProducts(formattedProducts);
+      } catch (error) {
+        console.error("Gagal mengambil data produk:", error);
       }
     };
+
     fetchProducts();
-  }, [selectedCategory, searchTerm]);
+  }, []);
 
   const filteredProducts = products.filter((product) => {
+    const matchCategory =
+      selectedCategory === "all" ||
+      product.category?.toLowerCase().includes(selectedCategory);
+
+    const matchSearch = product.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+
     const matchPrice =
       product.price >= priceRange[0] && product.price <= priceRange[1];
-    return matchPrice;
+
+    return matchCategory && matchSearch && matchPrice;
   });
 
   return (
@@ -200,7 +214,7 @@ export default function Produk() {
               ) : error ? (
                 <ErrorState
                   title="Gagal memuat data"
-                  message="Silakan coba lagi nanti"
+                  message={error || "Silakan coba lagi nanti"}
                   onRetry={() => window.location.reload()}
                 />
               ) : filteredProducts.length > 0 ? (

@@ -5,25 +5,24 @@ interface NavbarProps {
 }
 
 const titles: Record<string, string> = {
-  dashboard: 'Dashboard',
-  'manajemen-user': 'Manajemen User',
-  'data-user': 'Data User',
-  'bank-sampah': 'Bank Sampah',
-  'data-nasabah': 'Data Nasabah',
-  'setoran-masuk': 'Setoran Masuk',
-  'draft-setoran': 'Draft Setoran',
-  'pengelolaan-sampah': 'Pengelolaan Sampah',
-  'pengelolaan-pupuk': 'Pengelolaan Pupuk',
-  'penarikan-uang': 'Penarikan Uang',
-  'riwayat-penarikan': 'Riwayat Penarikan',
-  'produk-edu': 'Produk & Edu Store',
-  'pengelolaan-produk': 'Pengelolaan Produk',
-  'tambah-produk': 'Tambah Produk',
-  'pelatihan': 'Pelatihan',
-  'riwayat-pelatihan': 'Riwayat Pelatihan',
-  'manajemen-ifk': 'Manajemen IFK',
-  'kurikulum-hijau': 'Kurikulum Hijau',
-  laporan: 'Laporan',
+  dashboard: "Dashboard",
+  "manajemen-user": "Manajemen User",
+  "data-user": "Data User",
+  "bank-sampah": "Bank Sampah",
+  "data-nasabah": "Data Nasabah",
+  "setoran-masuk": "Setoran Masuk",
+  "draft-setoran": "Draft Setoran",
+  "pengelolaan-sampah": "Pengelolaan Sampah",
+  "pengelolaan-pupuk": "Pengelolaan Pupuk",
+  "penarikan-uang": "Penarikan Uang",
+  "riwayat-penarikan": "Riwayat Penarikan",
+  "produk-edu": "Produk & Edu Store",
+  "pengelolaan-produk": "Pengelolaan Produk",
+  pelatihan: "Pelatihan",
+  "riwayat-pelatihan": "Riwayat Pelatihan",
+  "manajemen-ifk": "Manajemen IFK",
+  "kurikulum-hijau": "Kurikulum Hijau",
+  laporan: "Laporan",
 };
 
 export function Navbar({ activeMenu }: NavbarProps) {
@@ -32,7 +31,9 @@ export function Navbar({ activeMenu }: NavbarProps) {
       <div className="px-8 py-4">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl text-card-foreground">{titles[activeMenu] ?? 'Dashboard'}</h2>
+            <h2 className="text-2xl text-card-foreground">
+              {titles[activeMenu] ?? "Dashboard"}
+            </h2>
             <p className="text-sm text-muted-foreground mt-1">
               Sistem Pengelolaan Sampah & Budidaya Maggot
             </p>

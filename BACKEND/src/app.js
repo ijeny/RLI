@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
+const fs = require("fs");
 const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productRoutes");
@@ -20,6 +22,17 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+const uploadPath = path.join(__dirname, "uploads");
+
+console.log("Lokasi uploads:", uploadPath);
+console.log("Folder uploads ada:", fs.existsSync(uploadPath));
+console.log(
+  "File pupuk.jpg ada:",
+  fs.existsSync(path.join(uploadPath, "pupuk.jpg"))
+);
+
+app.use("/uploads", express.static(uploadPath));
 
 // Routes
 app.use("/api/users", userRoutes);
